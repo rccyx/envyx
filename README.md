@@ -180,7 +180,6 @@ When validation fails, `createEnv` throws an error with details:
   NEXT_PUBLIC_BLOG_URL: [ 'Invalid url' ]
 }
 ```
-Here's an example in [action.](https://github.com/ashgw/ashgw.me/actions/runs/12863495726/job/35860182081#step:5:25)
 
 ## Presets
 
@@ -197,7 +196,7 @@ To simplify the management of environment variables for specific platforms, you 
 
 ### Loading Environment Files
 
-Edge runtimes can’t use Node’s `path`/`fs`. The clean way is to load your `.env` in the shell before running your app (e.g. [check this shell function](https://github.com/ashgw/zshfuncs/blob/main/env.zsh)).
+Edge runtimes can’t use Node’s `path`/`fs`. The clean way is to load your `.env` in the shell before running your app (e.g. [check this shell function](https://github.com/rccyx/zshfuncs/blob/main/env.zsh)).
 
 If you still want file-based loading in Node/CI, here’s how:
 
@@ -268,7 +267,7 @@ export const env = createEnv({
 ```
 > `runtimeEnv` is typesafe too so you won't have to worry about missing any variables
 
-Here's how you might configure it in a [monorepo](https://github.com/ashgw/ashgw.me/blob/main/packages/env/index.ts).
+Here's how you might configure it in a [monorepo](https://github.com/rccyx/x/blob/main/packages/env/index.ts).
 ### Additional Configuration for Turborepo
 
 If you're using Turborepo, remember to add your environment variables to `turbo.json`:

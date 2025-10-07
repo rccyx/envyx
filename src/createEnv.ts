@@ -90,7 +90,7 @@ export function createEnv<
 
   const runtimeEnv = customRuntimeEnv
     ? // If you're using NextJS you have to explicitly declare the environment variables with process.env
-      // @see https://github.com/ashgw/ts-env?tab=readme-ov-file#nextjs-monorepos
+      // @see https://github.com/rccyx/envyx?tab=readme-ov-file#nextjs-monorepos
       { ...process.env, ...customRuntimeEnv }
     : ({ ...process.env } as Record<string, Maybe<string>>);
 
@@ -159,3 +159,4 @@ export function createEnv<
 
   return finalEnv as PrefixedEnvVars<S, P, D[number]>;
 }
+
