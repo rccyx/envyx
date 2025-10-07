@@ -4,9 +4,9 @@
 
 A lightweight TypeScript utility for managing and validating environment variables with [`zod`](https://github.com/colinhacks/zod).
 
-[![CI](https://github.com/rccyx/envyx/actions/workflows/ci.yml/badge.svg)](https://github.com/rccyx/ts-roids/actions/workflows/ci.yml)
-[![@latest](https://img.shields.io/npm/v/envyx.svg)](https://www.npmjs.com/package/ts-roids)
-[![npm downloads](https://img.shields.io/npm/dm/ts-utils.svg)](https://www.npmjs.com/package/envyx)
+[![CI](https://github.com/rccyx/envyx/actions/workflows/ci.yml/badge.svg)](https://github.com/rccyx/envyx/actions/workflows/ci.yml)
+[![@latest](https://img.shields.io/npm/v/envyx.svg)](https://www.npmjs.com/package/envyx)
+[![npm downloads](https://img.shields.io/npm/dm/envyx.svg)](https://www.npmjs.com/package/envyx)
 <hr/>
 </div>
 
