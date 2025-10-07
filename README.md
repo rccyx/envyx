@@ -1,5 +1,4 @@
-# @ashgw/ts-env
-
+# envyx
 
 
 A lightweight TypeScript utility for managing and validating environment variables with [`zod`](https://github.com/colinhacks/zod).
@@ -32,13 +31,13 @@ A lightweight TypeScript utility for managing and validating environment variabl
 ## Installation
 
 ```bash
-npm install @ashgw/ts-env zod
+npm install envyx zod
 ```
 
 or with `pnpm`:
 
 ```bash
-pnpm add @ashgw/ts-env zod
+pnpm add envyx zod
 ```
 
 ## Usage
@@ -47,7 +46,7 @@ pnpm add @ashgw/ts-env zod
 
 ```typescript
 import { z } from 'zod';
-import { createEnv } from '@ashgw/ts-env';
+import { createEnv } from 'envyx';
 
 const env = createEnv({
   vars: {
@@ -66,7 +65,7 @@ If your environment variables have a common prefix, you can specify it:
 
 ```typescript
 import { z } from 'zod';
-import { createEnv } from '@ashgw/ts-env';
+import { createEnv } from 'envyx';
 
 const env = createEnv({
   vars: {
@@ -86,7 +85,7 @@ Disable the prefix for specific variables using the `disablePrefix` option:
 
 ```typescript
 import { z } from 'zod';
-import { createEnv } from '@ashgw/ts-env';
+import { createEnv } from 'envyx';
 
 const env = createEnv({
   vars: {
@@ -109,7 +108,7 @@ To skip validation, set `skipValidation` to `true`:
 
 ```typescript
 import { z } from 'zod';
-import { createEnv } from '@ashgw/ts-env';
+import { createEnv } from 'envyx';
 
 const env = createEnv({
   vars: {
@@ -129,7 +128,7 @@ For cases where you need to explicitly define environment variables (especially 
 
 ```typescript
 import { z } from 'zod';
-import { createEnv } from '@ashgw/ts-env';
+import { createEnv } from 'envyx';
 
 const isBrowser = typeof window !== 'undefined';
 
@@ -205,7 +204,7 @@ If you still want file-based loading in Node/CI, here’s how:
 ```ts
 import path from "path";
 import { config } from "dotenv";
-import { createEnv } from "@ashgw/ts-env";
+import { createEnv } from "envyx";
 import { z } from "zod";
 
 if (process.env.CI !== "true") {
@@ -240,7 +239,7 @@ So to solve this issue, use the `runtimeEnv` option to explicitly define your en
 
 ```typescript
 import { z } from 'zod';
-import { createEnv } from '@ashgw/ts-env';
+import { createEnv } from 'envyx';
 
 const isBrowser = typeof window !== 'undefined';
 
