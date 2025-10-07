@@ -1,6 +1,6 @@
 {
   "name": "envyx",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": false,
   "description": "Type-safe environment variable system for TypeScript. Validate, prefix, and expose envs.",
   "keywords": [
@@ -31,7 +31,9 @@
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
-      "*": ["dist/index.d.ts"]
+      "*": [
+        "dist/index.d.ts"
+      ]
     }
   },
   "files": [
@@ -103,4 +105,3 @@
     "format-check": "prettier --check ."
   }
 }
-
