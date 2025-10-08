@@ -192,8 +192,9 @@ When validation fails, `createEnv` throws an error with details:
 To simplify the management of environment variables for specific platforms, you can use presets provided by the library. For example, if you're deploying on Vercel, you can easily include all the relevant environment variables by importing and using the dedicated Vercel preset.
 
 ### Example with Vercel Preset
+<img width="1269" height="978" alt="image" src="https://github.com/user-attachments/assets/d8a660e8-08a0-4531-b31a-a504d79998db" />
 
-![image](https://github.com/user-attachments/assets/92acc69b-a5fe-4c54-9de4-90fba356bcc1)
+![image](https://github.com/user-attachments/assets/d8a660e8-08a0-4531-b31a-a504d79998db)
 #### Supported presets
 - Vercel
 - Netlify
