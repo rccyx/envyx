@@ -4,6 +4,7 @@ import type { Maybe, UniqueArray } from 'ts-roids';
 interface ZodIssueLike {
   readonly message?: string;
 }
+
 interface ZodErrorLike {
   readonly issues?: ReadonlyArray<ZodIssueLike>;
   readonly errors?: ReadonlyArray<ZodIssueLike>;
