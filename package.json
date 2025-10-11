@@ -1,47 +1,12 @@
 {
-  "name": "envyx",
-  "version": "1.0.0",
-  "private": false,
-  "description": "Type-safe environment variable system for TypeScript. Validate, prefix, and expose envs.",
-  "keywords": [
-    "env",
-    "environment variables",
-    "typescript",
-    "zod",
-    "validation",
-    "monorepo",
-    "nextjs"
-  ],
-  "homepage": "https://github.com/rccyx/envyx",
+  "author": {
+    "email": "oss@rccyx.com",
+    "name": "@rccyx"
+  },
   "bugs": {
     "url": "https://github.com/rccyx/envyx/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rccyx/envyx.git"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "@rccyx",
-    "email": "oss@rccyx.com"
-  },
-  "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "dist/index.d.ts"
-      ]
-    }
-  },
-  "files": [
-    "dist/",
-    "package.json",
-    "LICENSE",
-    "README.md"
-  ],
+  "description": "Type-safe environment variable system for TypeScript. Validate, prefix, and expose envs.",
   "devDependencies": {
     "@cspell/dict-cryptocurrencies": "5.0.0",
     "@rollup/plugin-replace": "5.0.5",
@@ -82,26 +47,61 @@
     "rollup-plugin-dts": "6.1.0",
     "semantic-release": "23.0.2",
     "ts-node": "^10.9.2",
+    "ts-roids": "^1.45.0",
     "tsx": "4.19.2",
     "typedoc": "0.25.13",
     "typescript": "5.3.3",
     "vite-tsconfig-paths": "4.2.3",
     "vitest": "1.5.0",
-    "ts-roids": "^1.45.0",
     "zod": ">=3.0.0"
   },
+  "files": [
+    "dist/",
+    "package.json",
+    "LICENSE",
+    "README.md"
+  ],
+  "homepage": "https://github.com/rccyx/envyx",
+  "keywords": [
+    "env",
+    "environment variables",
+    "typescript",
+    "zod",
+    "validation",
+    "monorepo",
+    "nextjs"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "name": "envyx",
+  "packageManager": "pnpm@8.14.0",
   "peerDependencies": {
     "zod": ">=3.0.0"
   },
-  "packageManager": "pnpm@8.14.0",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rccyx/envyx.git"
+  },
   "scripts": {
     "build": "pnpm run build:node",
     "build:node": "rimraf dist && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "format": "prettier . --write",
+    "format-check": "prettier --check .",
     "hooks": "husky init",
-    "test": "vitest --coverage --run",
     "lint": "pnpm format && pnpm lint:ts",
     "lint:ts": "tsc --noEmit; eslint .",
-    "format": "prettier . --write",
-    "format-check": "prettier --check ."
-  }
+    "test": "vitest --coverage --run"
+  },
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "version": "1.1.0"
 }
