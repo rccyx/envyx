@@ -1,10 +1,10 @@
-import type { Maybe, UniqueArray } from 'ts-roids';
+import type { Maybe, MaybeUndefined, UniqueArray } from 'ts-roids';
 
-/** ---------- minimal zod-like (structural) ---------- */
+/** ---------- minimal zod-like  ---------- */
+
 interface ZodIssueLike {
   readonly message?: string;
 }
-
 interface ZodErrorLike {
   readonly issues?: ReadonlyArray<ZodIssueLike>;
   readonly errors?: ReadonlyArray<ZodIssueLike>;
@@ -91,20 +91,20 @@ const isObject = (v: unknown): v is Record<string, unknown> =>
 const isZodLike = (s: unknown): s is ZodLike<unknown> =>
   isObject(s) && typeof (s as { safeParse?: unknown }).safeParse === 'function';
 
+/** Safe grab of a `.message` (keeps the linter happy) */
+const pickMessage = (v: unknown): string | undefined => {
+  const m = (v as { readonly message?: unknown })?.message;
+  return typeof m === 'string' && m.trim() ? m : undefined;
+};
+
 const extractZodMessages = (err: ZodErrorLike): string[] => {
   const out: string[] = [];
-  const pushFrom = (arr: ReadonlyArray<ZodIssueLike> | undefined): void => {
+  const pushFrom = (arr: MaybeUndefined<ReadonlyArray<unknown>>): void => {
     if (!Array.isArray(arr)) return;
-    for (const item of arr) {
-      const msg =
-        typeof item?.message === 'string' && item.message.trim()
-          ? item.message
-          : 'Invalid value';
-      out.push(msg);
-    }
+    for (const item of arr) out.push(pickMessage(item) ?? 'Invalid value');
   };
-  pushFrom(err.issues);
-  pushFrom(err.errors);
+  pushFrom(err.issues as MaybeUndefined<ReadonlyArray<unknown>>);
+  pushFrom(err.errors as MaybeUndefined<ReadonlyArray<unknown>>);
   if (!out.length && typeof err.toString === 'function') {
     const s = err.toString();
     if (typeof s === 'string' && s.trim()) out.push(s);

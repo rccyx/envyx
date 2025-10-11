@@ -10,6 +10,9 @@ export const env = createEnv({
   vars: {
     STR: z.string(),
     NUM: z.number(),
+    MAYBE_STR: z.string().optional().nullable(),
+    MAYBE_UNDEFINED_STR: z.string().optional(),
+    NULLABLE_STR: z.string().nullable(),
     BOOL: z.boolean(),
     DATE: z.date(),
     ARRAY: z.array(z.string()),
@@ -24,6 +27,7 @@ export const env = createEnv({
     UNKNOWN: z.unknown(),
     ANY: z.any(),
   },
+  skipValidation: true, // no need to validate here since it's inference tests (linter will take care of it)
 });
 
 describe('types', () => {
@@ -34,6 +38,26 @@ describe('types', () => {
 
   it('does not infer STR as number', () => {
     const test: IsNot<number, typeof env.STR> = true;
+    expect(test).toBe(true);
+  });
+
+  it('infers MAYBE_STR as string | null | undefined', () => {
+    const test: Is<string | null | undefined, typeof env.MAYBE_STR> = true;
+    expect(test).toBe(true);
+  });
+
+  it('does not infer MAYBE_STR as number', () => {
+    const test: IsNot<number, typeof env.MAYBE_STR> = true;
+    expect(test).toBe(true);
+  });
+
+  it('infers NULLABLE_STR as string | null', () => {
+    const test: Is<string | null, typeof env.NULLABLE_STR> = true;
+    expect(test).toBe(true);
+  });
+
+  it('infers MAYBE_UNDEFINED_STR as string | undefined', () => {
+    const test: Is<string | undefined, typeof env.MAYBE_UNDEFINED_STR> = true;
     expect(test).toBe(true);
   });
 
