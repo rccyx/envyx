@@ -1,0 +1,8 @@
+default_bump = "patch"
+bump_commit_message = "bump to {{version}}"
+bump_tag_message    = "release {{version}}"
+
+[changelog]
+enable = false
+path   = "CHANGELOG.md"
+

@@ -193,7 +193,7 @@ To simplify the management of environment variables for specific platforms, you 
 
 ### Example with Vercel Preset
 
-![image](https://github.com/user-attachments/assets/92acc69b-a5fe-4c54-9de4-90fba356bcc1)
+![image](https://github.com/user-attachments/assets/d8a660e8-08a0-4531-b31a-a504d79998db)
 #### Supported presets
 - Vercel
 - Netlify
