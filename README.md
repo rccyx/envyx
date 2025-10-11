@@ -28,12 +28,14 @@ A lightweight TypeScript utility for managing and validating environment variabl
 
 ## Why Not Use Other Options?
 
-- **t3-oss/t3-env**: Very convoluted. Also doesn't have a prefix. So I added a prefix option e.g: `prefix: 'NEXT_PUBLIC'`, you add it once and that's it.
+
+- **t3-oss/t3-env**: Overcomplicated and rigid. It forces you to split envs into `server`, `client`, and `shared` sections and manually manage prefixes. You either hardcode `NEXT_PUBLIC_` yourself or fight its schema merging. In `envyx`, you set a single `prefix: 'NEXT_PUBLIC'`, and it automatically appends it to the right vars you choose. It’s inferred, consistent, and impossible to misconfigure.
 
 - **envalid**: it doesn't use  `zod`, which means additional overhead for importing and learning a new schema validation lib. You already know zod, so might as well use it.
 
 - **envsafe**: too many options, can lead to mental overhead, and I don't like mental overhead, you probably don't too, plus, last commit was like 2 years ago.
-- **your own library:** If you've already created one, it probably sucks; this one doesn't.
+- **your own in app library:** There's a 87.68% chance it sucks.
+
 ## Installation
 
 ```bash
