@@ -39,29 +39,43 @@ describe('types', () => {
   it('vars are turuned into a tuple', () => {
     check(
       and(
-        is<
-          typeof tupleVars,
-          [
-            'STR',
-            'NUM',
-            'MAYBE_STR',
-            'MAYBE_UNDEFINED_STR',
-            'NULLABLE_STR',
-            'BOOL',
-            'DATE',
-          ]
-        >().describe('is exactly as is, exactly ordered'),
         isNot<
           typeof tupleVars,
           [
             'STR',
-            'MAYBE_STR',
+            'MAYBE_STR', // we flipped
+            'NUM', //  these two
             'MAYBE_UNDEFINED_STR',
             'NULLABLE_STR',
             'BOOL',
             'DATE',
           ]
-        >().describe('doesnt miss a single var')
+        >().describe('and alos cannot be unordered, in this case'),
+        and(
+          is<
+            typeof tupleVars,
+            [
+              'STR',
+              'NUM',
+              'MAYBE_STR',
+              'MAYBE_UNDEFINED_STR',
+              'NULLABLE_STR',
+              'BOOL',
+              'DATE',
+            ]
+          >().describe('is exactly as is, exactly ordered'),
+          isNot<
+            typeof tupleVars,
+            [
+              'STR',
+              'MAYBE_STR',
+              'MAYBE_UNDEFINED_STR',
+              'NULLABLE_STR',
+              'BOOL',
+              'DATE',
+            ]
+          >().describe('doesnt miss a single var')
+        )
       )
     );
   });
