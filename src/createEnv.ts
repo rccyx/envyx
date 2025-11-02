@@ -1,4 +1,5 @@
 import type { Maybe, MaybeUndefined, UniqueArray } from 'ts-roids';
+import { colors } from './colors';
 
 /** ---------- minimal zod-like  ---------- */
 
@@ -40,7 +41,7 @@ type PrefixedRuntimeEnv<
 };
 
 /** Configuration for createEnv. */
-interface EnvSchema<
+interface CreateOps<
   S extends EnvVar,
   P extends Maybe<string>,
   DisabledKeys extends readonly (keyof S & string)[] = [],
@@ -55,6 +56,13 @@ interface EnvSchema<
   disablePrefix?: UniqueArray<DisabledKeys>;
   /** Custom runtime env (merged with process.env). */
   runtimeEnv?: PrefixedRuntimeEnv<S, P, DisabledKeys>;
+  /**
+   * When true, prints a colored summary after loading.
+   * Example output:
+   *   ENV → loaded 23 vars successfully.
+   * If `skipValidation` is true, it appends "(skipped validation)".
+   */
+  log?: boolean;
 }
 
 /** Infer the validated type per key from the zod schema. */
@@ -91,7 +99,6 @@ const isObject = (v: unknown): v is Record<string, unknown> =>
 const isZodLike = (s: unknown): s is ZodLike<unknown> =>
   isObject(s) && typeof (s as { safeParse?: unknown }).safeParse === 'function';
 
-/** Safe grab of a `.message` (keeps the linter happy) */
 const pickMessage = (v: unknown): string | undefined => {
   const m = (v as { readonly message?: unknown })?.message;
   return typeof m === 'string' && m.trim() ? m : undefined;
@@ -122,13 +129,14 @@ export function createEnv<
   S extends EnvVar,
   P extends Maybe<string> = undefined,
   D extends readonly (keyof S & string)[] = [],
->(options: EnvSchema<S, P, D>): PrefixedEnvVars<S, P, D[number]> {
+>(options: CreateOps<S, P, D>): PrefixedEnvVars<S, P, D[number]> {
   const {
     vars,
     prefix,
     skipValidation = false,
     disablePrefix = [] as unknown as D,
     runtimeEnv: customRuntimeEnv,
+    log = false,
   } = options;
 
   const runtimeEnv: Record<string, Maybe<string>> = customRuntimeEnv
@@ -143,17 +151,26 @@ export function createEnv<
     (groupedErrors[prefixedKey] ??= []).push(...msgs);
   };
 
-  // Skip validation: just mirror values with correct key mapping
   if (skipValidation) {
     (Object.keys(vars) as (keyof S & string)[]).forEach((k) => {
       const shouldPrefix = !!(prefix && !disablePrefix.includes(k));
       const envKey = shouldPrefix ? `${prefix}_${k}` : k;
       finalEnv[envKey] = runtimeEnv[envKey];
     });
+
+    if (log) {
+      console.log(
+        `${colors.magenta('ENV')} → loaded ${colors.green(
+          String(Object.keys(finalEnv).length)
+        )} vars${
+          skipValidation ? ` ${colors.cyan('(skipped validation)')}` : ''
+        }.`
+      );
+    }
+
     return finalEnv as PrefixedEnvVars<S, P, D[number]>;
   }
 
-  // Validate each key with zod-like safeParse
   for (const key of Object.keys(vars) as (keyof S & string)[]) {
     const validatorUnknown: unknown = vars[key];
     const shouldPrefix = !!(prefix && !disablePrefix.includes(key));
@@ -174,9 +191,16 @@ export function createEnv<
   }
 
   if (Object.keys(groupedErrors).length) {
-    // eslint-disable-next-line no-console
     console.error('❌ Invalid environment variables:', groupedErrors);
     throw new Error('Invalid environment variables');
+  }
+
+  if (log) {
+    console.log(
+      `${colors.magenta('ENV')} → loaded ${colors.green(
+        String(Object.keys(finalEnv).length)
+      )} vars successfully.`
+    );
   }
 
   return finalEnv as PrefixedEnvVars<S, P, D[number]>;
