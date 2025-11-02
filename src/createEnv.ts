@@ -36,7 +36,7 @@ type PrefixedRuntimeEnv<
     ? K
     : P extends string
       ? `${P}_${Extract<K, string>}`
-      : K]?: Maybe<string>;
+      : K]: Maybe<string>;
 };
 
 /** Configuration for createEnv. */
