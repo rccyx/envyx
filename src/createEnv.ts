@@ -1,4 +1,4 @@
-import type { Maybe, MaybeUndefined, UniqueArray } from 'ts-roids';
+import type { Maybe, MaybeUndefined, UniqueArray } from 'typyx';
 import { colors } from './colors';
 
 /** ---------- minimal zod-like  ---------- */

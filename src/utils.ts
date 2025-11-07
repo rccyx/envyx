@@ -1,4 +1,4 @@
-import type { UnionToTuple, Keys } from 'ts-roids';
+import type { UnionToTuple, Keys } from 'typyx';
 
 // ordered tuple
 type Tuple<T> = UnionToTuple<Keys<T>>;
